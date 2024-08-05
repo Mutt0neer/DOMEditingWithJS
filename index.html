@@ -1,12 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="js-file.js" defer></script>
-</head>
-<body>
-    
-</body>
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 12px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>My shopping list</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item">
+      <button>Add item</button>
+    </div>
+
+    <ul>
+
+    </ul>
+
+    <script>
+        var i=0;
+        var list = document.querySelector("ul");
+        var input = document.getElementById("item");
+        var button = document.querySelector("button");
+        var current;
+        button.addEventListener("click", addItem);
+        input.addEventListener("keydown", addItem);
+        function addItem(){
+            current = input.value;
+            console.log(event.key);
+            if (event.key===undefined || event.key==="Enter"){
+                if (current!==""){
+                    console.log(current);
+                    var listItem = document.createElement("li");
+                    var LIText= document.createElement("span");
+                    var BU = document.createElement("button");
+                    LIText.textContent= current;
+                    listItem.appendChild(LIText);
+                    BU.textContent="Delete";
+                    listItem.appendChild(BU);
+                    list.appendChild(listItem);
+                    input.value= "";
+                    
+                    BU.addEventListener("click", removeItem);
+                    function removeItem(){
+                        list.removeChild(listItem);
+                    }
+                    input.focus();
+                }
+            }
+        }
+
+    </script>
+  </body>
 </html>
